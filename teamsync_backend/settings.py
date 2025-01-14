@@ -14,7 +14,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'projects',
-    'drf_yasg'
+    'drf_yasg',
+    'channels',
+    'channels_postgres'
 ]
 
 MIDDLEWARE = [
@@ -45,13 +47,39 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'teamsync_backend.wsgi.application'
+ASGI_APPLICATION = "teamsync_backend.asgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'zadaniator',  # Nazwa bazy danych
+        'USER': 'zadaniator',  # Użytkownik PostgreSQL (np. postgres)
+        'PASSWORD': 'siOtHXafkKPhAT',  # Hasło użytkownika
+        'HOST': '20.123.59.8',  # Adres bazy (lub kontener Dockera, np. 127.0.0.1)
+        'PORT': '5432',  # Domyślny port PostgreSQL
+    },
+    'channels_postgres': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'zadaniator',  # Nazwa bazy danych
+        'USER': 'zadaniator',  # Użytkownik PostgreSQL (np. postgres)
+        'PASSWORD': 'siOtHXafkKPhAT',  # Hasło użytkownika
+        'HOST': '20.123.59.8',  # Adres bazy (lub kontener Dockera, np. 127.0.0.1)
+        'PORT': '5432',  # Domyślny port PostgreSQL
     }
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_postgres.core.PostgresChannelLayer',
+        'CONFIG': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'zadaniator',
+            'USER': 'zadaniator',
+            'PASSWORD': 'siOtHXafkKPhAT',
+            'HOST': '20.123.59.8',
+            'PORT': '5432',
+        },
+    },
 }
 
 AUTH_PASSWORD_VALIDATORS = [

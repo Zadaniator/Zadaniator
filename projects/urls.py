@@ -9,6 +9,7 @@ from rest_framework_simplejwt.views import (
 )
 from .views import TeamViewSet, ProjectViewSet, TaskViewSet, UserViewSet
 from .features.user_register import RegisterUserView
+from .features.chat_get import ChatHistoryView
 
 # Router dla endpointów API
 router = DefaultRouter()
@@ -34,6 +35,7 @@ schema_view = get_schema_view(
 # Konfiguracja ścieżek (URL Patterns)
 urlpatterns = [
     path('', include(router.urls)),  # Endpointy API
+    path('chat/history/<str:room_name>/', ChatHistoryView.as_view(), name='chat-history'),
     path('register/', RegisterUserView.as_view(), name='register_user'),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # Token JWT
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Odświeżenie tokenu
