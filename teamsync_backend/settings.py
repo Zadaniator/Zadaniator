@@ -47,6 +47,7 @@ TEMPLATES = [
     },
 ]
 
+WSGI_APPLICATION = "teamsync_backend.wsgi.application"
 ASGI_APPLICATION = "teamsync_backend.asgi.application"
 
 DATABASES = {
