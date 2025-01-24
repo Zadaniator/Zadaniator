@@ -46,6 +46,8 @@ class Task(models.Model):
 
     priority = models.IntegerField(default=1)  # Priorytet zadania
 
+    approved_by_tester = models.BooleanField(default=False)
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
 
