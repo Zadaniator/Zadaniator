@@ -44,12 +44,9 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)  # Data utworzenia zadania
     updated_at = models.DateTimeField(auto_now=True)  # Data ostatniej aktualizacji zadania
 
-    rating = models.IntegerField(null=True, blank=True)  # Ocena wykonania zadania
     priority = models.IntegerField(default=1)  # Priorytet zadania
 
     def save(self, *args, **kwargs):
-        if self.rating and self.rating > 5:  # Maksymalna ocena
-            self.rating = 5
         super().save(*args, **kwargs)
 
     def __str__(self):
