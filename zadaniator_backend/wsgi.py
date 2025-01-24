@@ -1,6 +1,6 @@
 import os
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'teamsync_backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'zadaniator_backend.settings')
 
 application = get_wsgi_application()
