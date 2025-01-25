@@ -27,6 +27,11 @@ class TeamSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class UserSerializer(serializers.ModelSerializer):
+    groups = serializers.SerializerMethodField()
+    
     class Meta:
         model = User
-        fields = ['id', 'username', 'email']
+        fields = ['id', 'username', 'email', 'groups']
+        
+    def get_groups(self, obj):
+        return [group.name for group in obj.groups.all()]
